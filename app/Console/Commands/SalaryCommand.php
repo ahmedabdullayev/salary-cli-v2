@@ -48,7 +48,7 @@ class SalaryCommand extends Command
             }
             $dates = $service->searchForSalaryDays($year, 10);
                 if($service->array2csv($dates, $year)){
-                    $this->info('Success! xlsx created!');
+                    $this->info('Success! Salaries xlsx doc has been created!');
                 }
             } catch (Exception $e){
                 $this->warn("Error: Please close xlsx file with that year: ". $year);
