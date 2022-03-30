@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Services\SalaryService;
 use App\Services\ValidationService;
+use Exception;
 use Illuminate\Console\Command;
-use Maatwebsite\Excel\Excel;
 
 class SalaryCommand extends Command
 {
@@ -47,10 +47,10 @@ class SalaryCommand extends Command
                 return;
             }
             $dates = $service->searchForSalaryDays($year, 10);
-            if($service->array2csv($dates, $year)){
-                $this->info('Success! xlsx created!');
-            }
-            } catch (\Exception $e){
+                if($service->array2csv($dates, $year)){
+                    $this->info('Success! xlsx created!');
+                }
+            } catch (Exception $e){
                 $this->warn("Error: Please close xlsx file with that year: ". $year);
             }
 
