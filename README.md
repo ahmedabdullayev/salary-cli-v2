@@ -1,3 +1,23 @@
+# Documentation
+The task is to write a command line application (CLI application), the input of which is the year and the output is a table with the date of payment of each month's salary and the date of sending the reminder to the accountant (12 lines in total and the table header).
+
+### Technologies
+- Laravel 8
+- Laravel Excel
+
+### How to use?
+Install my app, go to console, run command: **php artisan start:command**
+Then input a year(for example: **2022**), write **yes**
+And finnaly you are going to get xlsx file with salary dates in **storage/app/salaries** folder
+
+### Output after the success input(for 2022 year)
+As you can see payment date is on 01-07 not on 01-08, because we have holiday on this date which is on our holidays array.
+![](output_result.png)
+
+### Project structure and code
+All my necessary code is here
+![](files.png)
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

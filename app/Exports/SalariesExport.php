@@ -33,8 +33,8 @@ class SalariesExport implements FromCollection, WithHeadings
     public function headings() :array
     {
         return [
-            'Date',
-            'Salary',
+            'Payment Date',
+            'Reminder Date',
         ];
     }
 }

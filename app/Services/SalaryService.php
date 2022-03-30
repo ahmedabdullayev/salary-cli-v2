@@ -20,13 +20,14 @@ class SalaryService
      * Search/collect salary days
      *
      * @param int $year
+     * @param int $nthDay
      * @return array
      * @throws Exception
      */
-        public function searchForSalaryDays(int $year): array
+        public function searchForSalaryDays(int $year, int $nthDay): array
         {
             $iter = 1;
-            $array = array();
+            $arrayOfDates = array();
             $nextYear = $year + 1;
             $period = new DatePeriod(
             new DateTime($year.'-01-01'),
@@ -36,25 +37,25 @@ class SalaryService
             foreach ($period as $key => $value) {
                 $fullDate = $value->format('Y-m-d');
                 $days = $value->format('t');
-                $dateMinus = $fullDate;
-                $timestamp = strtotime($dateMinus);
+                $paymentDate = $fullDate;
+                $timestampOfPaymentDate = strtotime($paymentDate);
                 if($iter >= $days){
-                $iter = 0;
+                    $iter = 0;
                 }
-                if($iter == 10){
-                    while(date("l", $timestamp) == "Saturday" || date("l", $timestamp) == "Sunday"
-                            || in_array(date("m-d", $timestamp), $this->holidaysArray->getHolidays())){
-                        $array[$dateMinus] = 'No';
-                        $dateMinus = date('Y-m-d', strtotime($dateMinus .' -1 day'));
-                        $timestamp = strtotime($dateMinus);
+                if($iter == $nthDay){ // 10 - in our case it is 10th day of a month
+                    $dateMinusThreeDays = date('Y-m-d', strtotime($paymentDate .' -3 day'));
+                    while(date("l", $timestampOfPaymentDate) == "Saturday"
+                            || date("l", $timestampOfPaymentDate) == "Sunday"
+                            || in_array(date("m-d", $timestampOfPaymentDate), $this->holidaysArray->getHolidays())){
+                        $paymentDate = date('Y-m-d', strtotime($paymentDate .' -1 day'));
+                        $dateMinusThreeDays = date('Y-m-d', strtotime($paymentDate .' -3 day'));
+                        $timestampOfPaymentDate = strtotime($paymentDate);
                     }
-                    $array[$dateMinus] = "Salary day";
-                }else{
-                    $array[$dateMinus] = 'No';
+                    $arrayOfDates[$paymentDate] = $dateMinusThreeDays;
                 }
                 $iter++;
             }
-        return $array;
+        return $arrayOfDates;
     }
 
     /**

@@ -46,7 +46,7 @@ class SalaryCommand extends Command
                 $this->warn("Warn: ". ValidationService::checkYearInput($year));
                 return;
             }
-            $dates = $service->searchForSalaryDays($year);
+            $dates = $service->searchForSalaryDays($year, 10);
             if($service->array2csv($dates, $year)){
                 $this->info('Success! xlsx created!');
             }
