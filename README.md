@@ -12,10 +12,12 @@ And finnaly you are going to get xlsx file with salary dates in **storage/app/sa
 
 ### Output after the success input(for 2022 year)
 As you can see payment date is on 01-07 not on 01-08, because we have holiday on this date which is on our holidays array.
+
 ![](output_result.png)
 
 ### Project structure and code
 All my necessary code is here
+
 ![](files.png)
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
