@@ -36,11 +36,10 @@ class SalaryCommand extends Command
      */
     public function handle()
     {
-
         $service = new SalaryService();
         $this->info("Welcome!");
-        $year = $this->ask("Please provide a year (before that please close csv
-                                    file with the same year if there is!)");
+        $year = $this->ask("Please provide a year (before that please close xlsx
+                                    file with the same year, if there is!)");
         if ($this->confirm('Do you wish to continue with '.$year.' year ?')) {
             try {
             if(ValidationService::checkYearInput($year) != null){
@@ -48,9 +47,11 @@ class SalaryCommand extends Command
                 return;
             }
             $dates = $service->searchForSalaryDays($year);
-            $service->array2csv($dates, $year);
+            if($service->array2csv($dates, $year)){
+                $this->info('Success! xlsx created!');
+            }
             } catch (\Exception $e){
-                $this->warn("Error: ". $e);
+                $this->warn("Error: Please close xlsx file with that year: ". $year);
             }
 
         }

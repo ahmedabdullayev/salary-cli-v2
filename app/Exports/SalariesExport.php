@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -18,7 +19,7 @@ class SalariesExport implements FromCollection, WithHeadings
         $this->data = $data;
     }
     /**
-    * @return \Illuminate\Support\Collection
+    * @return Collection
     */
     public function collection()
     {

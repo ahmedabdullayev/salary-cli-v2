@@ -6,7 +6,7 @@ use DatePeriod;
 use DateTime;
 use DateInterval;
 use App\Exports\SalariesExport;
-use Illuminate\Support\Facades\Storage;
+use Exception;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SalaryService
@@ -17,7 +17,11 @@ class SalaryService
     }
 
     /**
-     * @throws \Exception
+     * Search/collect salary days
+     *
+     * @param int $year
+     * @return array
+     * @throws Exception
      */
         public function searchForSalaryDays(int $year): array
         {
@@ -53,6 +57,12 @@ class SalaryService
         return $array;
     }
 
+    /**
+     * Modify created array of salaries for better xlsx array format
+     *
+     * @param $salariesArray
+     * @return array
+     */
     function ModifyArrayForXlsx($salariesArray): array
     {
             $xlsxArray = [];
@@ -65,9 +75,16 @@ class SalaryService
             return $xlsxArray;
     }
 
-    function array2csv($data, $year)
+    /**
+     * Store excel file in storage/app/salaries
+     *
+     * @param $data
+     * @param $year
+     * @return bool
+     */
+    function array2csv($data, $year): bool
     {
         $data = $this->ModifyArrayForXlsx($data);
-        echo Excel::store(new SalariesExport($data), 'salaries/'.$year.'.xlsx');
+        return Excel::store(new SalariesExport($data), 'salaries/'.$year.'.xlsx');
     }
 }
