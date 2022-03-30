@@ -21,7 +21,7 @@ class SalariesExport implements FromCollection, WithHeadings
     /**
     * @return Collection
     */
-    public function collection()
+    public function collection(): Collection
     {
         return collect($this->data);
     }
