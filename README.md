@@ -6,7 +6,7 @@ The task is to write a command line application (CLI application), the input of 
 - Laravel Excel
 
 ### How to use?
-Install my app, go to console, run command: **php artisan start:command**
+Install my app, open console, run command: **php artisan start:command**
 Then input a year(for example: **2022**), write **yes**
 And finnaly you are going to get xlsx file with salary dates in **storage/app/salaries** folder
 
